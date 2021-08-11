@@ -1,0 +1,34 @@
+{
+  "expo": {
+    "name": "Daily Needz App",
+    "slug": "dailyneedzapp",
+    "description": "Grocery shop that you will love",
+    "privacy": "unlisted",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "primaryColor": "#3a85f7",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "dnapp",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#3a85f7"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 200000
+    },
+    "assetBundlePatterns": [
+      "./assets/**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.nextbout.dailyneedz"
+    },
+    "android": {
+      "package": "com.nextbout.dailyneedz"
+    }
+  }
+}
