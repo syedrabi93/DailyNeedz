@@ -114,7 +114,7 @@ interface PropsFromDispatch {
 
 const mapStateToProps = (state: Store, ownProps: CardItemProps): PropsFromState => {
    let product = state.products.fetchProducts.listById[ownProps.productId];
-   console.log(product)
+ 
    return {
       product: product,
       count: product.product_count,

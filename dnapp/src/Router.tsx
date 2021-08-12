@@ -29,18 +29,19 @@ const AuthStack = createStackNavigator(
 
 const MainStack = createStackNavigator(
 	{
-		Home: HomeScreen,
-		Product: ProductScreen,
-		Cart: CartScreen,
-		Search: SearchScreen,
-		Account: AccountScreen,
-		Category: CategoryListScreen,
-		AccountEdit: AccountEditScreen,
-		PasswordChange: PasswordChangeScreen,
-		Help: HelpScreen,
-		SearchResult: SearchResultScreen,
-		AddressSearch: SearchAddressScreen,
-		Orders: OrderListScreen
+		Home: HomeScreen, // List of Products
+		Product: ProductScreen, // Product Screen
+		Cart: CartScreen, // cart items
+		Search: SearchScreen, // search screen search Results types search predictions
+		Account: AccountScreen, // Account Screen Change password
+		Category: CategoryListScreen, // Categoryes list
+		AccountEdit: AccountEditScreen, //  It is change
+		PasswordChange: PasswordChangeScreen, // Password
+		Help: HelpScreen, // Includes
+		SearchResult: SearchResultScreen, // Searchh Results
+		AddressSearch: SearchAddressScreen, // Addresses
+		Orders: OrderListScreen // My orders 
+		// Payment it opens browser window . Card Details.
 	},
 	{
 		defaultNavigationOptions: () => ({
@@ -68,7 +69,6 @@ const DrawerStack = createDrawerNavigator(
 	},
 	{
 		contentComponent: DrawerComponent,
-
 	}
 );
 

@@ -50,12 +50,13 @@ export default class App extends React.Component<any, any> {
 
     async componentDidMount() {
         var config = {
-            apiKey: "AIzaSyA5hnFqK5_X_XY7bGapzkO6GSz9IICCVBg",
-            authDomain: "dailyneedz-a743e.firebaseapp.com",
-            databaseURL: "https://dailyneedz-a743e.firebaseio.com",
-            projectId: "dailyneedz-a743e",
-            storageBucket: "dailyneedz-a743e.appspot.com",
-            messagingSenderId: "120704999861",
+            apiKey: "AIzaSyAZ3GDqDQgCNQcAI0zhEaJidqRksFkThQo",
+    authDomain: "dailyneedz-a743e.firebaseapp.com",
+    databaseURL: "https://dailyneedz-a743e.firebaseio.com",
+    projectId: "dailyneedz-a743e",
+    storageBucket: "dailyneedz-a743e.appspot.com",
+    messagingSenderId: "120704999861",
+    appId: "1:120704999861:web:543f2eb55b08174fcbf9fc"
         };
 
         if (!firebase.apps.length) {

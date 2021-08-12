@@ -160,37 +160,8 @@ class DrawerComponent extends PureComponent<DrawerComponentProps, State> {
 						}}
 						text="Rate Us"
 					/>
-					<DrawerItem
-						leftIcon={
-							<MaterialCommunityIcons name="alpha-d" color="rgba(0,0,0,0.6)" size={22} />
-						}
-						onPress={() => {
-							WebBrowser.openBrowserAsync("https://dailyneedz.nextbout.com/about-us/")
-						}}
-						text="About Us"
-					/>
-					<DrawerItem
-						leftIcon={
-							<MaterialCommunityIcons
-								name="lock-outline"
-								color="rgba(0,0,0,0.6)"
-								size={18}
-							/>
-						}
-						onPress={() => {
-							WebBrowser.openBrowserAsync("https://dailyneedz.nextbout.com/privacy-policy-2/")
-						}}
-						text="Privacy Policy"
-					/>
-					<DrawerItem
-						leftIcon={
-							<MaterialCommunityIcons name="notebook" color="rgba(0,0,0,0.6)" size={18} />
-						}
-						onPress={() => {
-							WebBrowser.openBrowserAsync("https://dailyneedz.nextbout.com/terms-and-conditions/")
-						}}
-						text="Terms & Conditions"
-					/>
+				
+				
 					<DrawerItem
 						leftIcon={
 							<MaterialCommunityIcons

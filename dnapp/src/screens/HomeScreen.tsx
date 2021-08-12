@@ -50,7 +50,7 @@ class HomeScreen extends Component<
 		this.setState({ slides });
 		const fetchSlides = cacheImages(slides)
 		await Promise.all([...fetchSlides]);
-		console.log("called");
+	
 		await this.props.fetchProducts();
 
 	}

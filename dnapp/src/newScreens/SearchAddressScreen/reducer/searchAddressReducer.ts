@@ -18,9 +18,8 @@ export const searchPlaces = (searchQuery: string) => async (dispatch: Dispatch) 
          return str;
       };
       const res = await mapsapi.get("/json" + stringify(data));
-      // console.log(res);
+   
       if (res.status === 200) {
-			console.log(res.data);
          dispatch(searchPlaceSuccess(res.data));
       } else {
          dispatch(searchPlaceFail());

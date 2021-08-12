@@ -51,7 +51,7 @@ class CartScreen extends Component<CartScreenProps & ReturnType<typeof mapStateT
 	handleLinking = async () => {
 		WebBrowser.dismissBrowser();
 		const { data } = await instamojoApi.get("/payment-requests/" + this.state.requestId)
-		console.log(data)
+	
 		if (data.payment_request.status !== "Completed") {
 			Alert.alert("Sorry", "Something Bad Happened at our end. If you have already paid for the order, it will be refunded between 24 hours.")
 		} else {
@@ -78,7 +78,7 @@ class CartScreen extends Component<CartScreenProps & ReturnType<typeof mapStateT
 					this.props.navigation.navigate("Orders");
 				}
 			} else {
-				SomethingBadHappened()
+				Alert.alert("Login First", "User Not Logged In");
 			}
 
 		} catch (e) {

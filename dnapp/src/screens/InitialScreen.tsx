@@ -9,7 +9,7 @@ import {
     Alert,
 } from "react-native";
 
-import * as Google from 'expo-google-app-auth'
+import * as Google from "expo-google-app-auth";
 import { Facebook } from "expo";
 import { connect } from "react-redux";
 
@@ -23,10 +23,8 @@ import { NavigationScreenProps } from "react-navigation";
 import { addSpinner, AddSpinnerProps } from "../newScreens/Spinner/addSpinner";
 import Constants from "expo-constants";
 const facebookId = "762787760764573";
-const googleAndroidId =
-    "120704999861-inmqo8cdi8lnh5prpftst9mbmc7quv8v.apps.googleusercontent.com";
 
-export interface Props extends NavigationScreenProps { }
+export interface Props extends NavigationScreenProps {}
 
 interface ImapDispatchToProps {
     signInUser: (user: Store["user"]) => void;
@@ -34,7 +32,7 @@ interface ImapDispatchToProps {
 
 class InitialScreen extends React.Component<
     Props & ImapDispatchToProps & AddSpinnerProps
-    > {
+> {
     static navigationOptions = () => ({ header: null });
 
     handleGoogleAuth = async () => {
@@ -45,7 +43,8 @@ class InitialScreen extends React.Component<
             //    firebase.auth().signOut();
             // }
             const result = await Google.logInAsync({
-                androidClientId: googleAndroidId,
+                iosClientId: `120704999861-b42hkt888dhp7610f2r1f0k90riflk9f.apps.googleusercontent.com`,
+                androidClientId: `120704999861-aouk835dh74p54jbfku8g5ugqroqoijp.apps.googleusercontent.com`,
                 scopes: ["profile", "email"],
             });
 
@@ -53,15 +52,24 @@ class InitialScreen extends React.Component<
                 const credential = firebase.auth.GoogleAuthProvider.credential(
                     result.idToken
                 );
-                await firebase
+                const { user } = await firebase
                     .auth()
-                    .signInAndRetrieveDataWithCredential(credential);
-
+                    .signInWithCredential(credential);
+                if (user) {
+                    this.props.signInUser({
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        phone: user.phoneNumber,
+                        loggedIn: true,
+                    });
+                }
                 return this.props.navigation.navigate("Home");
             } else {
                 return result;
             }
         } catch (e) {
+            console.log(e.message);
             return e;
         }
     };
@@ -69,22 +77,17 @@ class InitialScreen extends React.Component<
     handleFacebookLogin = async () => {
         this.props.showSpinner();
         try {
-            const {
-                type,
-                token,
-            } = await Facebook.logInWithReadPermissionsAsync(facebookId, {
-                permissions: ["public_profile", "email"],
-            });
+            const { type, token } =
+                await Facebook.logInWithReadPermissionsAsync(facebookId, {
+                    permissions: ["public_profile", "email"],
+                });
             if (type === "success") {
-                const credential = firebase.auth.FacebookAuthProvider.credential(
-                    token!
-                );
+                const credential =
+                    firebase.auth.FacebookAuthProvider.credential(token!);
 
-                let {
-                    user,
-                } = await firebase
+                let { user } = await firebase
                     .auth()
-                    .signInAndRetrieveDataWithCredential(credential!);
+                    .signInWithCredential(credential!);
                 if (user) {
                     this.props.signInUser({
                         uid: user.uid,
@@ -126,18 +129,19 @@ class InitialScreen extends React.Component<
                             width: 300,
                         }}
                     >
-                        <LoginButton onPress={this.handleGoogleAuth} iconName="google" color="#db3236">
+                        <LoginButton
+                            onPress={this.handleGoogleAuth}
+                            iconName="google-"
+                            color="#db3236"
+                        >
                             Google
-            </LoginButton>
+                        </LoginButton>
                         <LoginButton
                             onPress={this.handleFacebookLogin}
                             iconName="facebook"
                             color="#3b5998"
                         >
                             FaceBook
-                        </LoginButton>
-                        <LoginButton  onPress={() => {}}  iconName=""  color="#d9d9d9">
-                            Email
                         </LoginButton>
                     </View>
                 </View>
