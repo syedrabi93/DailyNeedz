@@ -1,7 +1,5 @@
 export { default as AccountEditScreen } from "./AccountEditScreen";
 export { default as AccountScreen } from "./AccountScreen";
-export { default as AddressEditScreen } from "./AddressEditScreen";
-export { default as AddressListScreen } from "./AddressListScreen";
 export { default as CartScreen } from "./CartScreen";
 export { default as HelpScreen } from "./HelpScreen";
 export { default as HomeScreen } from "./HomeScreen";
