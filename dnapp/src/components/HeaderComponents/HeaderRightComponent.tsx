@@ -22,9 +22,6 @@ class HeaderRightComponent extends React.PureComponent<HeaderRightComponentProps
 					justifyContent: 'space-between',
 					paddingHorizontal: 10
 				}}>
-				<HeaderButton onPress={() => { this.props.navigation.navigate('Search') }}>
-					<MaterialIcons name="search" size={24} color="#fff" />
-				</HeaderButton>
 				<HeaderButton onPress={() => { this.props.navigation.navigate("Cart") }}>
 
 					<MaterialCommunityIcons
