@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import * as Google from "expo-google-app-auth";
-import { Facebook } from "expo";
+import * as Facebook  from "expo-facebook";
 import { connect } from "react-redux";
 
 import firebase from "firebase";
@@ -22,7 +22,7 @@ import { Dispatch } from "redux";
 import { NavigationScreenProps } from "react-navigation";
 import { addSpinner, AddSpinnerProps } from "../newScreens/Spinner/addSpinner";
 import Constants from "expo-constants";
-const facebookId = "762787760764573";
+const facebookId = "567272988036419";
 
 export interface Props extends NavigationScreenProps {}
 
@@ -77,10 +77,16 @@ class InitialScreen extends React.Component<
     handleFacebookLogin = async () => {
         this.props.showSpinner();
         try {
-            const { type, token } =
-                await Facebook.logInWithReadPermissionsAsync(facebookId, {
-                    permissions: ["public_profile", "email"],
-                });
+            await Facebook.initializeAsync({
+                appId: facebookId,
+              });
+              const {
+                type,
+                //@ts-ignore
+                token
+              } = await Facebook.logInWithReadPermissionsAsync({
+                permissions: ['public_profile'],
+              });
             if (type === "success") {
                 const credential =
                     firebase.auth.FacebookAuthProvider.credential(token!);
