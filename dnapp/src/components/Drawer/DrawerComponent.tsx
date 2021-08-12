@@ -54,7 +54,7 @@ class DrawerComponent extends PureComponent<DrawerComponentProps, State> {
     };
     render() {
         const { navigation, loggedIn, name } = this.props;
-
+        
         return (
             <View style={styles.drawerContainer}>
                 <Portal>
@@ -71,26 +71,6 @@ class DrawerComponent extends PureComponent<DrawerComponentProps, State> {
                             Welcome{name ? ", " + name : ""}
                         </Text>
                     </View>
-                    <DrawerItem
-                        onPress={() => {
-                            navigation.navigate("AddressSearch");
-                        }}
-                        text="Keren Lines, Delhi Cantonment, New Delhi"
-                        leftIcon={
-                            <EvilIcons
-                                name="location"
-                                color="rgba(0,0,0,0.7)"
-                                size={22}
-                            />
-                        }
-                        rightIcon={
-                            <EvilIcons
-                                color="rgba(0,0,0,0.7)"
-                                name="pencil"
-                                size={22}
-                            />
-                        }
-                    />
                     {loggedIn ? (
                         <DrawerItem
                             onPress={() => {
@@ -233,10 +213,9 @@ export const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: Store) => {
-    const address = state.addresses[0];
     return {
         loggedIn: state.user.loggedIn,
-        address: address && address.location,
+
         name: state.user.name,
         cartCount: state.cart.list.reduce((acc, id) => {
             return (

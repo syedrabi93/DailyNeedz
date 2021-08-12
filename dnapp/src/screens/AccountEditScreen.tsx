@@ -10,17 +10,17 @@ import {
 	TextInput,
 	Alert,
 } from 'react-native';
-import { Header, NavigationScreenProps } from 'react-navigation';
-
+import {  NavigationScreenProps } from 'react-navigation';
 import firebase from "firebase"
 import { addSpinner, AddSpinnerProps } from '../newScreens/Spinner/addSpinner';
-import Axios from 'axios';
+
 import { dbapi } from '../axios';
 interface AccountEditScreenState {
 	email: string | null,
 	fullName: string,
 	phone: string,
 	dob: string,
+	address: string;
 }
 
 export interface UserDBData {
@@ -28,6 +28,7 @@ export interface UserDBData {
 	fullName: string,
 	phone: string,
 	dob: string,
+	address: string;
 }
 
 class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddSpinnerProps, AccountEditScreenState> {
@@ -61,6 +62,7 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 		fullName: "",
 		phone: "",
 		dob: "",
+		address: ""
 	}
 
 	handleChange = (name: keyof AccountEditScreenState) => (text: string) => {
@@ -72,7 +74,7 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 		try {
 			const user = firebase.auth().currentUser;
 			if (user) {
-				const result = await Axios.patch("/users/" + user.uid + ".json",this.state);
+				const result = await dbapi.patch("/users/" + user.uid + ".json",this.state);
 				if(result.status === 200){
 					Alert.alert("Success", "Saved information");
 				}
@@ -143,7 +145,10 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 								onChangeText={this.handleChange("dob")}
 								value={this.state.dob}
 								label="DOB" returnKeyType="next" />
-
+							<DNInput
+								onChangeText={this.handleChange("address")}
+								value={this.state.address}
+								label="Address" returnKeyType="next" />
 							<Button
 								onPress={this.saveUserInfo}
 								containerStyle={{ marginTop: 20, alignItems: 'center' }}>

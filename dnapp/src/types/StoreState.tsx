@@ -14,8 +14,6 @@ export interface Store {
 		};
 	};
 	cart: { list: string[] };
-	searchAddresses: any;
-	addresses: Address[];
 	selectedAddress: number;
 	loader: boolean;
 }
