@@ -41,8 +41,7 @@ class HomeScreen extends Component<
 	async componentDidMount() {
 		const res = await dnapi.get('/sliders');
 		const base = dnapi.defaults.baseURL?.endsWith('/') ? dnapi.defaults.baseURL.slice(0, dnapi.defaults.baseURL.length - 1) : dnapi.defaults.baseURL;
-		// console.log(base);
-		// console.log(res.data);
+	
 		const slides = res.data.map((sliderObj: {slide: { url: string }}) => {
 			return base + sliderObj.slide.url;
 		})
