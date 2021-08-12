@@ -15,8 +15,9 @@ import { Header, NavigationScreenProps } from 'react-navigation';
 import firebase from "firebase"
 import { addSpinner, AddSpinnerProps } from '../newScreens/Spinner/addSpinner';
 import Axios from 'axios';
+import { dbapi } from '../axios';
 interface AccountEditScreenState {
-	email: string,
+	email: string | null,
 	fullName: string,
 	phone: string,
 	dob: string,
@@ -92,9 +93,14 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 
 			const user = firebase.auth().currentUser;
 			if (user) {
-				const { data }: {data: UserDBData} = await Axios.get("/users/" + user.uid + ".json");
+				const { data }: {data: UserDBData} = await dbapi.get("/users/" + user.uid + ".json");
+				console.log(data, "data")
 				if (data) {
+					
 					this.setState(data)
+				}else {
+					  await dbapi.put("/users/" + user.uid + ".json", {email: user.email});
+					  this.setState({email: user.email})
 				}
 			} else {
 				Alert.alert("You have Logged out");
@@ -102,6 +108,7 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 			}
 		}
 		catch (e) {
+			console.log(e.message);
 			Alert.alert("Sorry", "Something Bad Happened");
 		}
 		this.props.hideSpinner()
@@ -111,17 +118,7 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 		return (
 			<Screen>
 				<DNRowHeader>Update Account Info</DNRowHeader>
-				<KeyboardAvoidingView
-					behavior="padding"
-					keyboardVerticalOffset={Header.HEIGHT + 34}
-					style={{ flex: 1 }}>
-					<ScrollView
-						showsVerticalScrollIndicator={false}
-						ref={ref => {
-							this.scrollView = ref;
-						}}
-						keyboardShouldPersistTaps="always">
-						<View style={{ flex: 1, paddingHorizontal: 30, paddingVertical: 20 }}>
+				<View style={{ flexGrow: 1, display: "flex",  paddingHorizontal: 30, paddingVertical: 20 }}>
 							<DNInput
 								onChangeText={this.handleChange("email")}
 								label="Email"
@@ -153,8 +150,7 @@ class AccountEditScreen extends React.PureComponent<NavigationScreenProps & AddS
 								Save
                      </Button>
 						</View>
-					</ScrollView>
-				</KeyboardAvoidingView>
+
 			</Screen>
 		);
 	}

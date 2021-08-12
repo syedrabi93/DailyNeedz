@@ -1,6 +1,6 @@
 import React from 'react';
 import { Screen, DNRowHeader, Bold, Reg, Light } from '../components';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import { Product } from '../types';
 import _ from "lodash";
 import { NavigationScreenOptions, ScrollView } from 'react-navigation';
@@ -9,6 +9,7 @@ import firebase from "firebase";
 import { AntDesign } from '@expo/vector-icons';
 import { Colors } from 'react-native-paper';
 import Axios from 'axios';
+import { dbapi } from '../axios';
 function getWeekDay(date: Date) {
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -32,14 +33,14 @@ export interface Order {
 class OrderListScreen extends React.PureComponent {
 	state = {
 		isReady: false,
-		orders: null as Order[] | null
+		orders: [] as Order[] 
 	}
 
 	async componentDidMount() {
 		try {
 			const user = firebase.auth().currentUser;
 			if (user) {
-				const result = await Axios.get("https://dailyneedz-a743e.firebaseio.com/orders/" + user.uid + ".json");
+				const result = await dbapi.get("/orders/" + user.uid + ".json");
 				if (result.status === 200) {
 					const orders = (_.map(result.data, (value) => {
 						return value;
@@ -92,7 +93,8 @@ class OrderListScreen extends React.PureComponent {
 				</DNRowHeader>
 				<View style={{ flex: 1 }}>
 					<ScrollView>
-						{this.state.orders && this.state.orders.map(order => {
+					{this.state.orders.length === 0 &&<Text>No Orders</Text>}
+					{this.state.orders && this.state.orders.map(order => {
 							const orderDate = new Date(order.orderDate);
 							return <View key={order.orderDate} style={{ flexDirection: "row", paddingVertical: 10 }}>
 								<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>

@@ -54,6 +54,7 @@ const MainStack = createStackNavigator(
 				shadowOpacity: 0,
 				borderBottomWidth: 0
 			},
+			
 			headerTitleStyle: { color: '#fff', fontFamily: 'opr', fontWeight: 'normal' },
 			headerBackTitle: null,
 			headerTintColor: '#fff',

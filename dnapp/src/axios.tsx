@@ -29,5 +29,6 @@ let instamojoApi = axios.create({
    timeout: 10000,
 });
 
+let dbapi = axios.create({baseURL: 'https://dailyneedz-a743e.firebaseio.com'});
 
-export {  dnapi, wpapi, instamojoApi, mapsapi };
+export {  dnapi, wpapi, instamojoApi, mapsapi, dbapi };

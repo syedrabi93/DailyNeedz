@@ -16,7 +16,7 @@ import grave from "../../assets/grave.png";
 import _ from "lodash";
 import { WebBrowser } from "expo";
 import * as Linking from "expo-linking";
-import { instamojoApi, } from "../axios";
+import { dbapi, instamojoApi, } from "../axios";
 import firebase from "firebase";
 import { AddSpinnerProps, addSpinner } from "../newScreens/Spinner/addSpinner";
 import { Dispatch } from "redux";
@@ -65,7 +65,7 @@ class CartScreen extends Component<CartScreenProps & ReturnType<typeof mapStateT
 		this.props.showSpinner()
 		try {
 			if (user) {
-				const result = await Axios.post("/orders/" + user.uid + ".json", {
+				const result = await dbapi.post("/orders/" + user.uid + ".json", {
 					orderedItems: this.props.cartProducts,
 					subTotal: amount,
 					delivered: "Preparing",
