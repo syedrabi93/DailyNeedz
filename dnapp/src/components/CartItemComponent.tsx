@@ -52,7 +52,7 @@ class CartItem extends React.PureComponent<CardItemProps & PropsFromState & Prop
                   <View style={styles.cardItemBodyContainer}>
                      <View style={{ alignItems: 'flex-start' }}>
                         <Text style={styles.sizeStyle}>{product_size}</Text>
-                        <Text style={styles.priceStyle}>Rs {product_mrp}</Text>
+                        <Text style={styles.priceStyle}>$ {product_mrp}</Text>
                      </View>
                      <View>
                         <Add

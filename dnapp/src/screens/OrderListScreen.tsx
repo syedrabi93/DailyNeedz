@@ -49,6 +49,7 @@ class OrderListScreen extends React.PureComponent {
 						var dateA =  Date.parse(a.orderDate), dateB =  Date.parse(b.orderDate);
 						return dateB - dateA
 					})
+					// console.log(result.data)
 					this.setState({ isReady: true, orders });
 				} else {
 					SomethingBadHappened()
@@ -57,6 +58,7 @@ class OrderListScreen extends React.PureComponent {
 				SomethingBadHappened()
 			}
 		} catch (e) {
+			console.log(e.message)
 			SomethingBadHappened()
 		}
 	}
