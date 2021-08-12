@@ -37,7 +37,7 @@ class InitialScreen extends React.Component<
 
     handleGoogleAuth = async () => {
         //will handle
-
+        this.props.showSpinner();
         try {
             // if (firebase.auth().currentUser) {
             //    firebase.auth().signOut();
@@ -71,6 +71,8 @@ class InitialScreen extends React.Component<
         } catch (e) {
             console.log(e.message);
             return e;
+        } finally {
+            this.props.hideSpinner();
         }
     };
 
@@ -113,8 +115,10 @@ class InitialScreen extends React.Component<
             //some error occurred while loggin in
             Alert.alert("Sorry", "There was an error at out end");
             console.warn(e);
+        }finally {
+            this.props.hideSpinner();
         }
-        this.props.hideSpinner();
+      
     };
 
     render() {
