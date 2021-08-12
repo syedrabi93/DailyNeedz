@@ -11,7 +11,6 @@ import { DrawerComponent } from './components';
 import { PRIMARY_COLOR } from './constants';
 import { HomeScreen, CartScreen, SearchScreen, AccountScreen, CategoryListScreen, AccountEditScreen, PasswordChangeScreen, HelpScreen, SearchResultScreen, InitialScreen, OrderListScreen } from './screens';
 import ProductScreen from './screens/ProductScreen2';
-import SearchAddressScreen from './newScreens/SearchAddressScreen/SearchAddressScreen';
 
 const AuthStack = createStackNavigator(
 	{
@@ -38,7 +37,6 @@ const MainStack = createStackNavigator(
 		AccountEdit: AccountEditScreen, //  It is change
 		PasswordChange: PasswordChangeScreen, // Password
 		Help: HelpScreen, // Includes
-		AddressSearch: SearchAddressScreen, // Addresses
 		Orders: OrderListScreen // My orders 
 		// Payment it opens browser window . Card Details.
 	},
