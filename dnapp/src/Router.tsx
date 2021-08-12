@@ -9,7 +9,7 @@ import {
 import { HeaderRightComponent } from './components/HeaderComponents';
 import { DrawerComponent } from './components';
 import { PRIMARY_COLOR } from './constants';
-import { HomeScreen, CartScreen, SearchScreen, AccountScreen, CategoryListScreen, AccountEditScreen, PasswordChangeScreen, HelpScreen, SearchResultScreen, InitialScreen, OrderListScreen } from './screens';
+import { HomeScreen, CartScreen,  AccountScreen, AccountEditScreen, HelpScreen, InitialScreen, OrderListScreen } from './screens';
 import ProductScreen from './screens/ProductScreen2';
 
 const AuthStack = createStackNavigator(
@@ -35,7 +35,7 @@ const MainStack = createStackNavigator(
 		Account: AccountScreen, // Account Screen Change password
 	
 		AccountEdit: AccountEditScreen, //  It is change
-		PasswordChange: PasswordChangeScreen, // Password
+
 		Help: HelpScreen, // Includes
 		Orders: OrderListScreen // My orders 
 		// Payment it opens browser window . Card Details.
